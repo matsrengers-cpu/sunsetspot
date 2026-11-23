@@ -1,0 +1,162 @@
+@import 'leaflet/dist/leaflet.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-night-950 text-white font-sans antialiased;
+}
+
+@layer components {
+  .glass {
+    @apply bg-night-900/85 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/40;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-4 min-h-[48px] font-semibold transition
+      active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-sun-orange/70 disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-sun-gradient text-night-950 shadow-lg shadow-sun-pink/25;
+  }
+  .btn-ghost {
+    @apply btn bg-white/5 hover:bg-white/10 text-white border border-white/10;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 min-h-[40px] text-sm font-medium
+      border transition active:scale-95;
+  }
+  .chip-on {
+    @apply chip bg-white text-night-950 border-white;
+  }
+  .chip-off {
+    @apply chip bg-white/5 text-white/80 border-white/15 hover:bg-white/10;
+  }
+  .input {
+    @apply w-full rounded-2xl bg-night-800 border border-white/10 px-4 min-h-[48px] text-base text-white
+      placeholder:text-white/40 focus:outline-none focus:border-sun-orange/70 focus:ring-2 focus:ring-sun-orange/30;
+  }
+  .label {
+    @apply block text-sm font-medium text-white/70 mb-1.5;
+  }
+  .text-gradient {
+    @apply bg-sun-gradient bg-clip-text text-transparent;
+  }
+  .legal h2 {
+    @apply text-xl font-bold mt-8 mb-3 text-white;
+  }
+  .legal h3 {
+    @apply text-base font-semibold mt-5 mb-2 text-white;
+  }
+  .legal p,
+  .legal li {
+    @apply text-white/75 leading-relaxed mb-3;
+  }
+  .legal ul {
+    @apply list-disc pl-6;
+  }
+  .legal a {
+    @apply text-sun-orange underline underline-offset-2;
+  }
+  .placeholder {
+    @apply bg-sun-orange/15 text-sun-gold rounded px-1;
+  }
+}
+
+/* ---------- Leaflet: dunkles Kartenthema ---------- */
+.leaflet-container {
+  background: #0b0814;
+  font-family: inherit;
+}
+.dark-tiles .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(200deg) brightness(0.8) contrast(0.9) saturate(0.6);
+}
+.leaflet-control-attribution {
+  background: rgba(18, 13, 31, 0.7) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 10px;
+}
+.leaflet-control-attribution a {
+  color: #ffb27a !important;
+}
+.leaflet-control-zoom {
+  display: none;
+}
+.add-mode .leaflet-container {
+  cursor: crosshair;
+}
+
+/* ---------- Spot-Marker ---------- */
+.spot-pin {
+  width: 44px;
+  height: 44px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--c);
+  border: 3px solid #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 0 4px color-mix(in srgb, var(--c) 35%, transparent);
+  display: grid;
+  place-items: center;
+  transition: transform 0.15s ease;
+}
+.spot-pin > span {
+  transform: rotate(45deg);
+  font-size: 19px;
+  line-height: 1;
+}
+.spot-pin.selected {
+  transform: rotate(-45deg) scale(1.2);
+  border-color: #ffc857;
+}
+.spot-pin .fav {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  transform: rotate(45deg);
+  font-size: 13px;
+}
+.user-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.3);
+}
+.new-pin {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffc857;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 8px rgba(255, 200, 87, 0.35);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 14px rgba(255, 200, 87, 0.1);
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+.safe-top {
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+}
